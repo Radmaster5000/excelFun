@@ -11,6 +11,7 @@
 
 import openpyxl, os, time
 from selenium import webdriver # Make sure the 'geckodriver' executable needs to be in PATH message isn't showing up
+from introScreen import *
 
 # Add a useage message. e.g. Usage: EastNorth.py 'testBook.xlsx' [sheetname]
 
@@ -19,6 +20,8 @@ from selenium import webdriver # Make sure the 'geckodriver' executable needs to
 postcodes = [] # start with an empty list
 eastings = []
 northings = []
+
+start = False
 
 # Function for scraping the doogal.co.uk website
 
@@ -48,6 +51,16 @@ def doogalScrape(postcodes, sheet):
 
 	return 
 
+print(start)
+
+intro()
+
+status = input()
+
+if(status == 'go'):
+	start = True
+
+print(start)
 
 xlFileName = input('Enter Excel Workbook name:\n') # get excel file name
 sheetName = input('Enter Worksheet name:\n') # get sheet name if applicable
