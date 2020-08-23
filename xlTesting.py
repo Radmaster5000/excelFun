@@ -80,6 +80,8 @@ else:
 
 # Open workbook and assign to variables provided
 wb = openpyxl.load_workbook(xlFileName)
+# CREATE A CATCH-CASE HERE FOR A FileNotFoundError
+
 sheet = wb.get_sheet_by_name(sheetName)
 
 
