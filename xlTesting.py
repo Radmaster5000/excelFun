@@ -12,6 +12,7 @@
 import openpyxl, os, time
 from selenium import webdriver # Make sure the 'geckodriver' executable needs to be in PATH message isn't showing up
 from introScreen import *
+from openpyxl.utils.exceptions import InvalidFileException
 
 # Add a useage message. e.g. Usage: EastNorth.py 'testBook.xlsx' [sheetname]
 
@@ -57,12 +58,12 @@ intro()
 
 status = input()
 
-if(status == 'go'):
+if(status == '\n'):
 	start = True
 
 print(start)
 
-xlFileName = input('Enter Excel Workbook name:\n') # get excel file name
+xlFileName = input('Enter Excel Workbook name (including the extension):\n') # get excel file name
 sheetName = input('Enter Worksheet name:\n') # get sheet name if applicable
 
 
@@ -78,9 +79,14 @@ else:
 	saveFileName = 'EastNorth.xlsx'
 
 
-# Open workbook and assign to variables provided
-wb = openpyxl.load_workbook(xlFileName)
-# CREATE A CATCH-CASE HERE FOR A FileNotFoundError
+try:
+	wb = openpyxl.load_workbook(xlFileName)
+except InvalidFileException:
+	print("don't forget the extension")
+	quit()
+except FileNotFoundError:
+	print('Please make sure the excel file is in the current directory')
+	quit()
 
 sheet = wb.get_sheet_by_name(sheetName)
 
