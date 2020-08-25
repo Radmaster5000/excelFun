@@ -13,6 +13,7 @@ import openpyxl, os, time
 from selenium import webdriver # Make sure the 'geckodriver' executable needs to be in PATH message isn't showing up
 from introScreen import *
 from openpyxl.utils.exceptions import InvalidFileException
+from selenium.common.exceptions import WebDriverException
 
 # Add a useage message. e.g. Usage: EastNorth.py 'testBook.xlsx' [sheetname]
 
@@ -27,7 +28,13 @@ start = False
 # Function for scraping the doogal.co.uk website
 
 def doogalScrape(postcodes, sheet):
-	browser = webdriver.Firefox()
+	try:
+		browser = webdriver.Firefox()
+	except WebDriverException:
+		print('try typing the following into terminal:')
+		print('export PATH=$PATH:/Users/Radmaster5000/Desktop')
+		quit()
+
 	browser.get('http://www.doogal.co.uk')
 	row = 2
 	eastingColumn = 2

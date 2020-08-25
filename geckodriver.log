@@ -1,0 +1,8 @@
+1598387224128	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/y5/46mc1w4n6xz5z05n8m7w8zs80000gn/T/rust_mozprofilejaY2b2"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1598387231886	Marionette	INFO	Listening on port 49745
+1598387231902	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://tpc.googlesyndication.com/pagead/js/r20200820/r20110914/client/qs_click_protection_fy2019.js, line 14: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://tpc.googlesyndication.com/pagead/js/r20200820/r20110914/client/qs_click_protection_fy2019.js, line 14: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: https://maps.googleapis.com/maps-api-v3/api/js/42/1/intl/en_gb/common.js, line 66: NS_ERROR_NOT_INITIALIZED: 
