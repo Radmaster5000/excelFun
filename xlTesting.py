@@ -14,6 +14,7 @@ from selenium import webdriver # Make sure the 'geckodriver' executable needs to
 from introScreen import *
 from openpyxl.utils.exceptions import InvalidFileException
 from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import NoSuchElementException
 
 # Add a useage message. e.g. Usage: EastNorth.py 'testBook.xlsx' [sheetname]
 
@@ -46,11 +47,17 @@ def doogalScrape(postcodes, sheet):
 		elem.submit()
 		# Page needs to load before it can successfully find the CSS elements for the Easting and Northing
 		time.sleep(1)
-	
-		easting = browser.find_element_by_css_selector('div.row:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(3)').text
+		
+		try:
+			easting = browser.find_element_by_css_selector('div.row:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(3)').text
+		except NoSuchElementException:
+			easting = "Error with postcode"
 
-		northing = browser.find_element_by_css_selector('div.row:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(3)').text
-	
+		try:
+			northing = browser.find_element_by_css_selector('div.row:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(3)').text
+		except NoSuchElementException:
+			northing = "Error with postcode"
+
 		# Print the eastings and northings to the adjacent cells on the spreadsheet	
 		sheet.cell(row = row, column = eastingColumn, value = easting)
 		sheet.cell(row = row, column = northingColumn, value = northing)	
@@ -95,7 +102,7 @@ except FileNotFoundError:
 	print('Please make sure the excel file is in the current directory')
 	quit()
 
-sheet = wb.get_sheet_by_name(sheetName)
+sheet = wb[sheetName]
 
 
 # Load the postcodes into the postcodes list from the workbook
@@ -106,6 +113,7 @@ numOfPostcodes = len(sheet['A'])
 for listItem in range(2, numOfPostcodes+1): 
 	postcodes.append(sheet.cell(row=listItem, column=1).value)
 
+print("Running... Please wait...")
 # Open the Doogal website then loop through each postcode, scraping the eastings and northings for each one
 # *** Possibly just print from the spreadsheet using print(sheet[A2'].value) ***
 # Print the eastings and northings from the lists into the correct columns on the spreadsheet
@@ -113,3 +121,6 @@ doogalScrape(postcodes, sheet)
 
 wb.save(saveFileName)
 wb.close()
+
+print("All done!")
+print(":)")
