@@ -10,3 +10,11 @@ I also have to have a geckodriver thing saved to the same directory as the progr
 I don't even know what that is, I just know it needs it to work. 
 
 More work needed.
+
+#############################################################
+
+TODO:
+
+Add speed selection (there's a bug if the web page doesn't load fast enough for the script)
+
+Clean up the intro screen and make it a proper menu
