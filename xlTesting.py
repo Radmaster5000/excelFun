@@ -12,6 +12,7 @@
 import openpyxl, os, time
 from selenium import webdriver # Make sure the 'geckodriver' executable needs to be in PATH message isn't showing up
 from introScreen import *
+from checkSpeed import *
 from openpyxl.utils.exceptions import InvalidFileException
 from selenium.common.exceptions import WebDriverException
 from selenium.common.exceptions import NoSuchElementException
@@ -46,7 +47,7 @@ def doogalScrape(postcodes, sheet):
 		elem.send_keys(postcode)
 		elem.submit()
 		# Page needs to load before it can successfully find the CSS elements for the Easting and Northing
-		time.sleep(1)
+		time.sleep(speed)
 		
 		try:
 			easting = browser.find_element_by_css_selector('div.row:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(3)').text
@@ -79,7 +80,7 @@ print(start)
 
 xlFileName = input('Enter Excel Workbook name (including the extension):\n') # get excel file name
 sheetName = input('Enter Worksheet name:\n') # get sheet name if applicable
-
+speed = int(checkSpeed())
 
 # if no sheetname is inputted, default to standard sheet name.
 #if(sheetName == NULL):
