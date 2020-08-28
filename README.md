@@ -11,10 +11,12 @@ I don't even know what that is, I just know it needs it to work.
 
 More work needed.
 
-#############################################################
+*************************************************
 
 TODO:
 
-Add speed selection (there's a bug if the web page doesn't load fast enough for the script)
+~~Add speed selection (there's a bug if the web page doesn't load fast enough for the script)~~
+
+Speed added, but still having a problem with one of the existing postcodes
 
 Clean up the intro screen and make it a proper menu
