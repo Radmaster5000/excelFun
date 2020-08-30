@@ -34,7 +34,8 @@ def doogalScrape(postcodes, sheet):
 		browser = webdriver.Firefox()
 	except WebDriverException:
 		print('try typing the following into terminal:')
-		print('export PATH=$PATH:/Users/Radmaster5000/Desktop')
+		print('export PATH=$PATH:')
+		print('followed by the path to geckodriver.exe')
 		quit()
 
 	browser.get('http://www.doogal.co.uk')
@@ -69,11 +70,10 @@ def doogalScrape(postcodes, sheet):
 
 print(start)
 
-intro()
+status = intro()
 
-status = input()
 
-if(status == '\n'):
+if(status == 's'):
 	start = True
 
 print(start)
